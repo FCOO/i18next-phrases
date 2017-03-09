@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="da" style="font-size: 100%">
+<head>
+	<title>fcoo.dk - i18next-phrases - Demo</title>
+	<meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta http-equiv='x-dns-prefetch-control' content='on'>
+
+	<meta name='copyright' content='FCOO'>
+	<meta name='owner' content='FCOO'>
+</head>
+
+<body>
+    See Browser Console
+	<script src="bower_components.js"></script>
+	<script src="../src/i18next-phrases.js"></script>
+	<script>
+        function testInConsole(){
+            function get( ns_key ){
+                console.log( ns_key,'=>','"'+i18next.t( ns_key )+'"' );
+            }
+            console.log( 'i18next.language =',i18next.language )
+            console.log( 
+                i18next.sentence({da:'På dansk', en:'In English'})
+            );
+            console.log( '*** namespace = NS1 ***' );
+            get('NS1:key1');
+            get('NS1:key2');
+            get('NS1:key3');
+            get('NS1:key4');
+            get('NS1:key5');
+            get('NS1:key6');
+
+            console.log( '' );
+            console.log( '*** namespace = NS2 ***' );
+            get('NS2:key1');
+            get('NS2:key2');
+            get('NS2:key3');
+            get('NS2:key4');
+            get('NS2:key5');
+            get('NS2:key6');
+        }
+
+        i18next.init();        
+
+        i18next.addPhrase('NS1', 'key1', {
+            da: 'NS1-key1 på dansk',
+            en: 'NS1-key1 in Englisk'
+        });
+        i18next.addKeyPhrase('key1', 'NS2', {
+            da: 'NS2-key1 på dansk',
+            en: 'NS2-key1 in Englisk'
+        });
+
+        
+        i18next.addPhrases('NS1', {
+            'key2': {
+                da: 'NS1-key2 på dansk',
+                en: 'NS1-key2 in Englisk'
+            },
+            'key3': {
+                da: 'NS1-key3 på dansk',
+                en: 'NS1-key3 in Englisk'
+            }
+        });
+
+        i18next.addKeyPhrases('key2', {
+            'NS1': { 
+                da: 'NS1-key2 på dansk',
+                en: 'NS1-key2 in Englisk'
+            },
+            'NS2': { 
+                da: 'NS2-key2 på dansk',
+                en: 'NS2-key2 in Englisk'
+            }               
+        });
+
+        i18next.addBundlePhrases({
+            'NS1': {
+                'key4': {
+                    da: 'NS1-key4 på dansk',
+                    en: 'NS1-key4 in Englisk'
+                },
+                'key5': {
+                    da: 'NS1-key5 på dansk',
+                    en: 'NS1-key5 in Englisk'
+                }
+            },
+            'NS2': {
+                'key3': {
+                    da: 'NS2-key3 på dansk',
+                    en: 'NS2-key3 in Englisk'
+                }
+            }
+        });
+
+        i18next.addBundleKeyPhrases({
+            'key4': {
+                'NS2': {
+                    da: 'NS2-key4 på dansk',
+                    en: 'NS2-key4 in Englisk'
+                }
+            },
+            'key5': {
+                'NS2': {
+                    da: 'NS2-key5 på dansk',
+                    en: 'NS2-key5 in Englisk'
+                }
+            },
+            'key6': {
+                'NS1': {
+                    da: 'NS1-key6 på dansk',
+                    en: 'NS1-key6 in Englisk'
+                },
+                'NS2': {
+                    da: 'NS2-key6 på dansk',
+                    en: 'NS2-key6 in Englisk'
+                }
+            }
+        });
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        console.log('**** IN ENGLISH ***');
+        i18next.changeLanguage('en');
+        testInConsole();
+        
+        console.log('');
+        console.log('**** PÅ DANSK ***');
+        i18next.changeLanguage('da');
+        testInConsole();
+
+    </script>
+</body>
+</html>
