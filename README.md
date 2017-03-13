@@ -112,8 +112,8 @@ The following methods are added to [i18next].
         }
     }
 
-### `i18next.loadPhrases( jsonFileName, onFail )`
-`onFail ) function()`
+### `i18next.loadPhrases( jsonFileName, callback )`
+`callback = function( err ) //err == null on succes`
 
 ### `i18next.addKeyPhrase( key, namespace, langValues )`
 `langValues = { [lang: value]xN }`
@@ -132,8 +132,8 @@ The following methods are added to [i18next].
         }
     }`
 
-### `i18next.loadKeyPhrases( jsonFileName, onFail )`
-`onFail ) function()`
+### `i18next.loadKeyPhrases( jsonFileName, callback )`
+`callback = function( err ) //err == null on succes`
 
 ### `i18next.sentence( langValues, options ) - return {string}`
 `langValues = { {lang: value}xN }`

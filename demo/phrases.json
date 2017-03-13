@@ -1,0 +1,22 @@
+{
+    "NS1": {
+        "key7": {
+            "da": "NS1-key7 på dansk",
+            "en": "NS1-key7 in Englisk"
+        },
+        "key8": {
+            "da": "NS1-key8 på dansk",
+            "en": "NS1-key8 in Englisk"
+        }
+    },       
+    "NS2": {
+        "key7": {
+            "da": "NS2-key7 på dansk",
+            "en": "NS2-key7 in Englisk"
+        },
+        "key8": {
+            "da": "NS2-key8 på dansk",
+            "en": "NS2-key8 in Englisk"
+        }
+    }       
+}

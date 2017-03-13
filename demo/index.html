@@ -15,6 +15,23 @@
 	<script src="bower_components.js"></script>
 	<script src="../src/i18next-phrases.js"></script>
 	<script>
+        var readyCount = 0;
+        
+        function ready(){
+            readyCount++;
+            if (readyCount == 2){
+                console.log('**** IN ENGLISH ***');
+                i18next.changeLanguage('en');
+                testInConsole();
+        
+                console.log('');
+                console.log('**** PÅ DANSK ***');
+                i18next.changeLanguage('da');
+                testInConsole();
+            }
+        }
+
+
         function testInConsole(){
             function get( ns_key ){
                 console.log( ns_key,'=>','"'+i18next.t( ns_key )+'"' );
@@ -30,6 +47,8 @@
             get('NS1:key4');
             get('NS1:key5');
             get('NS1:key6');
+            get('NS1:key7');
+            get('NS1:key8');
 
             console.log( '' );
             console.log( '*** namespace = NS2 ***' );
@@ -39,13 +58,19 @@
             get('NS2:key4');
             get('NS2:key5');
             get('NS2:key6');
+            get('NS2:key7');
+            get('NS2:key8');
         }
 
         i18next.init();        
-
-i18next.loadPhrases('findexikke.json', function( err ){
-    console.log('Error=',err);
-});
+        i18next.loadPhrases('phrases.json', function( err ){
+            if (err)
+                console.log('Error=',err);
+            else {
+                console.log('Load OK');
+                ready();
+            }
+        });
 
         i18next.addPhrase('NS1', 'key1', {
             da: 'NS1-key1 på dansk',
@@ -123,23 +148,7 @@ i18next.loadPhrases('findexikke.json', function( err ){
             }
         });
 
-
-        
-        
-        
-        
-        
-        
-        
-        
-        console.log('**** IN ENGLISH ***');
-        i18next.changeLanguage('en');
-        testInConsole();
-        
-        console.log('');
-        console.log('**** PÅ DANSK ***');
-        i18next.changeLanguage('da');
-        testInConsole();
+        ready();
 
     </script>
 </body>

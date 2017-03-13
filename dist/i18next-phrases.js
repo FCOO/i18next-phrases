@@ -132,18 +132,18 @@
     };
 
     /***********************************************************************
-    i18next.loadPhrases( jsonFileName );
+    i18next.loadPhrases( jsonFileName, callback );
     ***********************************************************************/
-    i18next.loadPhrases = function( jsonFileName, callBack ){
+    i18next.loadPhrases = function( jsonFileName, callback ){
         var jqxhr = $.getJSON( jsonFileName ),
             _this = this;
-        if (callBack)
-            jqxhr.fail( callBack );
+        if (callback)
+            jqxhr.fail( callback );
 
         jqxhr.done( function( data ) {
             _this.addBundlePhrases( data );
-            if (callBack)
-              callBack( null );
+            if (callback)
+              callback( null );
         });
     };
     
@@ -191,17 +191,19 @@
     };
 
     /***********************************************************************
-    i18next.loadKeyPhrases = function( jsonFileName, onFail )
+    i18next.loadKeyPhrases = function( jsonFileName, callback )
     ***********************************************************************/
-    i18next.loadKeyPhrases = function( jsonFileName, onFail ){
+    i18next.loadKeyPhrases = function( jsonFileName, callback ){
         var jqxhr = $.getJSON( jsonFileName );
-        if (onFail)
-            jqxhr.fail( onFail );
+        if (callback)
+            jqxhr.fail( callback );
 
         jqxhr.done( function( data ) {
             $.each( data, function( namespace, keyLangValues ) {
                 i18next.addKeyPhrases( namespace, keyLangValues );
             });
+            if (callback)
+              callback( null );
         });
     
     };
