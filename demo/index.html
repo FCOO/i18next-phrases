@@ -43,6 +43,10 @@
 
         i18next.init();        
 
+i18next.loadPhrases('findexikke.json', function( err ){
+    console.log('Error=',err);
+});
+
         i18next.addPhrase('NS1', 'key1', {
             da: 'NS1-key1 på dansk',
             en: 'NS1-key1 in Englisk'

@@ -134,14 +134,16 @@
     /***********************************************************************
     i18next.loadPhrases( jsonFileName );
     ***********************************************************************/
-    i18next.loadPhrases = function( jsonFileName, onFail ){
+    i18next.loadPhrases = function( jsonFileName, callBack ){
         var jqxhr = $.getJSON( jsonFileName ),
             _this = this;
-        if (onFail)
-            jqxhr.fail( onFail );
+        if (callBack)
+            jqxhr.fail( callBack );
 
         jqxhr.done( function( data ) {
             _this.addBundlePhrases( data );
+            if (callBack)
+              callBack( null );
         });
     };
     
