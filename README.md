@@ -94,7 +94,7 @@ To make adding translation easier two new formats are supported:
 ## Methods
 The following methods are added to [i18next].
 
-### `i18next.addPhrase( key, [namespace,] langValues) `
+### `i18next.addPhrase( [namespace,] key, langValues) `
 `key {string}` can be a combined namespace:key string. 
 `langValues = { [lang: value]xN }`
 

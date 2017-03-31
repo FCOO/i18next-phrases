@@ -73,7 +73,7 @@
     "use strict";
 
     /***********************************************************************
-    addPhrase( key, [namespace,] langValues) 
+    addPhrase( [namespace,] key, langValues) 
     - key {string} can be a combined namespace:key string. 
     - langValues = { [lang: value]xN }
     ***********************************************************************/
@@ -82,15 +82,15 @@
             _this = this;
 
         if (arguments.length == 2){
+            //No namespace
+            namespace  = this.options.defaultNS[0];
+            key        = arguments[0];     
             langValues = arguments[1];
-            if (arguments[0].indexOf(nsSeparator) > -1){
-              key = arguments[0].split(nsSeparator)[1];
-              namespace = arguments[0].split(nsSeparator)[0];
-            }
-            else {
-                key = arguments[0];
-                namespace = this.options.defaultNS[0];
-            }
+        }
+
+        if (key.indexOf(nsSeparator) > -1){
+            key = key.split(nsSeparator)[1];
+            namespace = key.split(nsSeparator)[0];
         }
 
         $.each( langValues, function( lang, value ){
@@ -105,6 +105,11 @@
     ***********************************************************************/
     i18next.addPhrases = function( namespace, keyLangValues ){
         var _this = this;
+        if (arguments.length == 1){
+            //no namespace, only keyLangValues
+            namespace     = this.options.defaultNS[0];
+            keyLangValues = arguments[0];
+        }
         $.each( keyLangValues, function( key, langValues ){
             _this.addPhrase( namespace, key, langValues );
         });

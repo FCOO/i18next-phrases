@@ -40,7 +40,7 @@
             console.log( 
                 i18next.sentence({da:'På dansk', en:'In English'})
             );
-            console.log( '*** namespace = NS1 ***' );
+            console.log( '*** namespace: "NS1" ***' );
             get('NS1:key1');
             get('NS1:key2');
             get('NS1:key3');
@@ -51,7 +51,7 @@
             get('NS1:key8');
 
             console.log( '' );
-            console.log( '*** namespace = NS2 ***' );
+            console.log( '*** namespace: "NS2" ***' );
             get('NS2:key1');
             get('NS2:key2');
             get('NS2:key3');
@@ -60,6 +60,17 @@
             get('NS2:key6');
             get('NS2:key7');
             get('NS2:key8');
+
+            console.log( '' );
+            console.log( '*** namespace: null ***' );
+            get('key1');
+            get('key2');
+            get('key3');
+            get('key4');
+            get('key5');
+            get('key6');
+            get('key7');
+            get('key8');
         }
 
         i18next.init();        
@@ -147,6 +158,13 @@
                 }
             }
         });
+
+        for (var i=1; i<=8; i++ )
+            i18next.addPhrase('key'+i, {
+                da: 'key'+i+' på dansk',
+                en: 'key'+i+' in Englisk'
+            });
+
 
         ready();
 
