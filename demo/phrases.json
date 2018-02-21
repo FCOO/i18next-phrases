@@ -2,21 +2,21 @@
     "NS1": {
         "key7": {
             "da": "NS1-key7 på dansk",
-            "en": "NS1-key7 in Englisk"
+            "en": "NS1-key7 in English"
         },
         "key8": {
             "da": "NS1-key8 på dansk",
-            "en": "NS1-key8 in Englisk"
+            "en": "NS1-key8 in English"
         }
-    },       
+    },
     "NS2": {
         "key7": {
             "da": "NS2-key7 på dansk",
-            "en": "NS2-key7 in Englisk"
+            "en": "NS2-key7 in English"
         },
         "key8": {
             "da": "NS2-key8 på dansk",
-            "en": "NS2-key8 in Englisk"
+            "en": "NS2-key8 in English"
         }
-    }       
+    }
 }

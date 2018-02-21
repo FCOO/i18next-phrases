@@ -1,5 +1,5 @@
 /****************************************************************************
-    i18next-phrases.js, 
+    i18next-phrases.js,
 
     (c) 2017, FCOO
 
@@ -9,16 +9,16 @@
 ****************************************************************************/
 
 /****************************************************************************
-    Default 1-dim json-structure for i18next is 
-        { lang1: { 
+    Default 1-dim json-structure for i18next is
+        { lang1: {
             namespace: { key: value1 }
           },
-          lang2: { 
+          lang2: {
             namespace: { key: value2 }
           }
         }
 
-    To make adding translation easier two new formats are supported: 
+    To make adding translation easier two new formats are supported:
 
     1: phrase: namespace->key->lang
         {
@@ -43,7 +43,7 @@
                 }
             }
         }
-    
+
     2: key-phrase: key->namespace->lang
         {
             key1: {
@@ -69,12 +69,24 @@
         }
 ****************************************************************************/
 
-(function ($, i18next/*, window, document, undefined*/) {
+(function ($, i18next, Promise/*, window, document, undefined*/) {
     "use strict";
 
     /***********************************************************************
-    addPhrase( [namespace,] key, langValues) 
-    - key {string} can be a combined namespace:key string. 
+    _loadJSON( jsonFileName, options, resolve )
+    Loading (key-)phrases from json-file(s) using fcoo/promise-get
+    ***********************************************************************/
+    i18next._loadJSON = function( jsonFileName, options, resolve ){
+        jsonFileName = $.isArray(jsonFileName) ? jsonFileName : [jsonFileName];
+
+        $.each( jsonFileName, function( index, url ){
+            Promise.getJSON( url, options, resolve );
+        });
+    };
+
+    /***********************************************************************
+    addPhrase( [namespace,] key, langValues)
+    - key {string} can be a combined namespace:key string.
     - langValues = { [lang: value]xN }
     ***********************************************************************/
     i18next.addPhrase = function( namespace, key, langValues ){
@@ -84,7 +96,7 @@
         if (arguments.length == 2){
             //No namespace
             namespace  = this.options.defaultNS[0];
-            key        = arguments[0];     
+            key        = arguments[0];
             langValues = arguments[1];
         }
 
@@ -119,10 +131,10 @@
     /***********************************************************************
     addBundlePhrases( namespaceKeyLangValues  )
     - namespaceKeyLangValues = {
-          namespace1: { 
-              key1: { [lang: value]xN }, 
+          namespace1: {
+              key1: { [lang: value]xN },
               key2: { [lang: value]xN }
-          }, 
+          },
           namespace2:{
               ...
           }
@@ -137,21 +149,15 @@
     };
 
     /***********************************************************************
-    i18next.loadPhrases( jsonFileName, callback );
+    i18next.loadPhrases( jsonFileName, options );
+    Loading phrases from json-file(s) using fcoo/promise-get
     ***********************************************************************/
-    i18next.loadPhrases = function( jsonFileName, callback ){
-        var jqxhr = $.getJSON( jsonFileName ),
-            _this = this;
-        if (callback)
-            jqxhr.fail( callback );
-
-        jqxhr.done( function( data ) {
-            _this.addBundlePhrases( data );
-            if (callback)
-              callback( null );
+    i18next.loadPhrases = function( jsonFileName, options ){
+        this._loadJSON( jsonFileName, options, function( data ){
+            i18next.addBundlePhrases( data );
         });
     };
-    
+
     /***********************************************************************
     i18next.addKeyPhrase = function( key, namespace, langValues )
     - langValues = { [lang: value]xN }
@@ -162,9 +168,9 @@
 
     /***********************************************************************
     i18next.addKeyPhrases = function( key, namespaceLangValues )
-    - namespaceLangValues = { 
-          namespace1: { [lang: value]xN }, 
-          namespace2: { [lang: value]xN } }, 
+    - namespaceLangValues = {
+          namespace1: { [lang: value]xN },
+          namespace2: { [lang: value]xN } },
       }
     ***********************************************************************/
     i18next.addKeyPhrases = function( key, namespaceLangValues ){
@@ -177,11 +183,11 @@
 
     /***********************************************************************
     addBundleKeyPhrases( keyNamespaceLangValues  )
-    keyNamespaceLangValues = { 
-        key1: { 
-            namespace1: { [lang: value]xN }, 
+    keyNamespaceLangValues = {
+        key1: {
+            namespace1: { [lang: value]xN },
             namespace2: { [lang: value]xN }
-        }, 
+        },
         key2:{
             ...
         }
@@ -196,39 +202,29 @@
     };
 
     /***********************************************************************
-    i18next.loadKeyPhrases = function( jsonFileName, callback )
+    i18next.loadKeyPhrases = function( jsonFileName, options )
+    Loading key-phrases from json-file(s) using fcoo/promise-get
     ***********************************************************************/
-    i18next.loadKeyPhrases = function( jsonFileName, callback ){
-        var jqxhr = $.getJSON( jsonFileName );
-        if (callback)
-            jqxhr.fail( callback );
-
-        jqxhr.done( function( data ) {
+    i18next.loadKeyPhrases = function( jsonFileName, options ){
+        this._loadJSON( jsonFileName, options, function( data ){
             $.each( data, function( namespace, keyLangValues ) {
                 i18next.addKeyPhrases( namespace, keyLangValues );
             });
-            if (callback)
-              callback( null );
         });
-    
     };
-    
-    
+
+
     /***********************************************************************
     sentence ( langValues, options )
     - langValues = { [lang: value]xN }
     A single translation of a sentence. No key used or added
     ***********************************************************************/
-    i18next.sentence = function( langValues, options ){ 
+    i18next.sentence = function( langValues, options ){
         var nsTemp = '__TEMP__',
             keyTemp = '__KEY__',
             _this = this,
             nsSeparator = this.options.nsSeparator;
-        
-        //Remove any data from nsTemp
-//        $.each( languages, function( index, lang ){
-//            _this.removeResourceBundle(lang, nsTemp);
-//        });
+
         this.addPhrase( nsTemp, keyTemp, langValues );
         var result = this.t(nsTemp + nsSeparator + keyTemp, options );
 
@@ -249,4 +245,4 @@
     };
 
 
-}(jQuery, this.i18next, this, document));
+}(jQuery, this.i18next, this.Promise, this, document));

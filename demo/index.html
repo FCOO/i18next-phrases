@@ -16,14 +16,14 @@
 	<script src="../src/i18next-phrases.js"></script>
 	<script>
         var readyCount = 0;
-        
+
         function ready(){
             readyCount++;
             if (readyCount == 2){
                 console.log('**** IN ENGLISH ***');
                 i18next.changeLanguage('en');
                 testInConsole();
-        
+
                 console.log('');
                 console.log('**** PÅ DANSK ***');
                 i18next.changeLanguage('da');
@@ -37,7 +37,7 @@
                 console.log( ns_key,'=>','"'+i18next.t( ns_key )+'"' );
             }
             console.log( 'i18next.language =',i18next.language )
-            console.log( 
+            console.log(
                 i18next.sentence({da:'På dansk', en:'In English'})
             );
             console.log( '*** namespace: "NS1" ***' );
@@ -73,11 +73,9 @@
             get('key8');
         }
 
-        i18next.init();        
-        i18next.loadPhrases('phrases.json', function( err ){
-            if (err)
-                console.log('Error=',err);
-            else {
+        i18next.init();
+        i18next.loadPhrases('phrases.json', {
+            finally: function(){
                 console.log('Load OK');
                 ready();
             }
@@ -85,51 +83,51 @@
 
         i18next.addPhrase('NS1', 'key1', {
             da: 'NS1-key1 på dansk',
-            en: 'NS1-key1 in Englisk'
+            en: 'NS1-key1 in English'
         });
         i18next.addKeyPhrase('key1', 'NS2', {
             da: 'NS2-key1 på dansk',
-            en: 'NS2-key1 in Englisk'
+            en: 'NS2-key1 in English'
         });
 
-        
+
         i18next.addPhrases('NS1', {
             'key2': {
                 da: 'NS1-key2 på dansk',
-                en: 'NS1-key2 in Englisk'
+                en: 'NS1-key2 in English'
             },
             'key3': {
                 da: 'NS1-key3 på dansk',
-                en: 'NS1-key3 in Englisk'
+                en: 'NS1-key3 in English'
             }
         });
 
         i18next.addKeyPhrases('key2', {
-            'NS1': { 
+            'NS1': {
                 da: 'NS1-key2 på dansk',
-                en: 'NS1-key2 in Englisk'
+                en: 'NS1-key2 in English'
             },
-            'NS2': { 
+            'NS2': {
                 da: 'NS2-key2 på dansk',
-                en: 'NS2-key2 in Englisk'
-            }               
+                en: 'NS2-key2 in English'
+            }
         });
 
         i18next.addBundlePhrases({
             'NS1': {
                 'key4': {
                     da: 'NS1-key4 på dansk',
-                    en: 'NS1-key4 in Englisk'
+                    en: 'NS1-key4 in English'
                 },
                 'key5': {
                     da: 'NS1-key5 på dansk',
-                    en: 'NS1-key5 in Englisk'
+                    en: 'NS1-key5 in English'
                 }
             },
             'NS2': {
                 'key3': {
                     da: 'NS2-key3 på dansk',
-                    en: 'NS2-key3 in Englisk'
+                    en: 'NS2-key3 in English'
                 }
             }
         });
@@ -138,23 +136,23 @@
             'key4': {
                 'NS2': {
                     da: 'NS2-key4 på dansk',
-                    en: 'NS2-key4 in Englisk'
+                    en: 'NS2-key4 in English'
                 }
             },
             'key5': {
                 'NS2': {
                     da: 'NS2-key5 på dansk',
-                    en: 'NS2-key5 in Englisk'
+                    en: 'NS2-key5 in English'
                 }
             },
             'key6': {
                 'NS1': {
                     da: 'NS1-key6 på dansk',
-                    en: 'NS1-key6 in Englisk'
+                    en: 'NS1-key6 in English'
                 },
                 'NS2': {
                     da: 'NS2-key6 på dansk',
-                    en: 'NS2-key6 in Englisk'
+                    en: 'NS2-key6 in English'
                 }
             }
         });
@@ -162,7 +160,7 @@
         for (var i=1; i<=8; i++ )
             i18next.addPhrase('key'+i, {
                 da: 'key'+i+' på dansk',
-                en: 'key'+i+' in Englisk'
+                en: 'key'+i+' in English'
             });
 
 

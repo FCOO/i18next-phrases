@@ -5,6 +5,9 @@
 ## Description
 Extend i18next to load translations as { namespace: { key: { lang1: value1, lang2: value2 } } }
 
+Using [fcoo/promise-get](https://github.com/FCOO/promise-get) to read xml-data
+
+
 ## Installation
 ### bower
 `bower install https://github.com/FCOO/i18next-phrases.git --save`
@@ -112,8 +115,9 @@ The following methods are added to [i18next].
         }
     }
 
-### `i18next.loadPhrases( jsonFileName, callback )`
-`callback = function( err ) //err == null on succes`
+### `i18next.loadPhrases( jsonFileName {(string|string[])} , options )`
+`options` contains functions to handle error and finish. See  [fcoo/promise-get](https://github.com/FCOO/promise-get)
+
 
 ### `i18next.addKeyPhrase( key, namespace, langValues )`
 `langValues = { [lang: value]xN }`
@@ -132,8 +136,8 @@ The following methods are added to [i18next].
         }
     }`
 
-### `i18next.loadKeyPhrases( jsonFileName, callback )`
-`callback = function( err ) //err == null on succes`
+### `i18next.loadKeyPhrases( jsonFileName {(string|string[])}, options )`
+`options` contains functions to handle error and finish. See  [fcoo/promise-get](https://github.com/FCOO/promise-get)
 
 ### `i18next.sentence( langValues, options ) - return {string}`
 `langValues = { {lang: value}xN }`
