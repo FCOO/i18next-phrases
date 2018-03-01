@@ -5,7 +5,7 @@
 ## Description
 Extend i18next to load translations as { namespace: { key: { lang1: value1, lang2: value2 } } }
 
-Using [fcoo/promise-get](https://github.com/FCOO/promise-get) to read xml-data
+Using [fcoo/promise-get](https://github.com/FCOO/promise-get) to read json-data
 
 
 ## Installation
