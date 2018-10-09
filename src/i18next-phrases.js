@@ -220,8 +220,8 @@
     A single translation of a sentence. No key used or added
     ***********************************************************************/
     i18next.sentence = function( langValues, options ){
-        var nsTemp = '__TEMP__',
-            keyTemp = '__KEY__',
+        var nsTemp = '__SENTENCE_TEMP__',
+            keyTemp = '__SENTENCE_KEY__',
             _this = this,
             nsSeparator = this.options.nsSeparator;
 

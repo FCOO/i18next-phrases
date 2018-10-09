@@ -20,6 +20,7 @@
         function ready(){
             readyCount++;
             if (readyCount == 2){
+
                 console.log('**** IN ENGLISH ***');
                 i18next.changeLanguage('en');
                 testInConsole();
@@ -27,6 +28,7 @@
                 console.log('');
                 console.log('**** PÅ DANSK ***');
                 i18next.changeLanguage('da');
+alert(i18next.s({da:'En dansk sætning', en:'An English sentences'}));
                 testInConsole();
             }
         }
