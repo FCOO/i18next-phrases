@@ -17,6 +17,15 @@
 	<script>
         var readyCount = 0;
 
+        let textArray = [
+                {da: 'Dette er et nummer', en: 'This is a number'},
+                1234,
+                '+',
+                4321,
+                {da: 'Slut', en: 'The end'}
+            ];
+
+
         function ready(){
             readyCount++;
             if (readyCount == 2){
@@ -25,10 +34,16 @@
                 i18next.changeLanguage('en');
                 testInConsole();
 
+
                 console.log('');
+
+
                 console.log('**** PÅ DANSK ***');
                 i18next.changeLanguage('da');
-alert(i18next.s({da:'En dansk sætning', en:'An English sentences'}));
+
+
+
+
                 testInConsole();
             }
         }
@@ -73,6 +88,15 @@ alert(i18next.s({da:'En dansk sætning', en:'An English sentences'}));
             get('key6');
             get('key7');
             get('key8');
+
+            console.log( '' );
+            console.log( '*** i18next.sentence ***' );
+            console.log("i18next.s({da:'En dansk sætning', en:'An English sentences'}) => ", i18next.s({da:'En dansk sætning', en:'An English sentences'}));
+
+            console.log( '' );
+            console.log( '*** i18next.sentenceArray ***' );
+            console.log('textArray = ', textArray);
+            console.log("i18next.sentenceArray(textArray, '___') =>", i18next.sentenceArray(textArray, '___') );
         }
 
         i18next.init();

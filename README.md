@@ -141,6 +141,7 @@ The following methods are added to [i18next].
 
 ### `i18next.sentence( langValues, options ) - return {string}`
 `langValues = { {lang: value}xN }`
+
 A single translation of a phrase. No key used or added. 
 E.g.
 
@@ -149,6 +150,12 @@ E.g.
 ### `i18next.s( langValues, options ) - return {string}`
 Same as `i18next.sentence`
 
+### `i18next.sentenceArray( []langValues, seperator, options ) - return {string}`
+`langValues = { {lang: value}xN }`
+
+A join of translations phrases in and array. E.g.
+
+    i18next.sentenceArray([{ da:'Dette er på dansk', en:'This is ín English'}, 1234, { da:'Slut', en:'The end'}, '_')
 
 
 ## Copyright and License
